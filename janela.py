@@ -7,10 +7,9 @@ from tkinter import *
 import tkinter as tk
 from conexao import connect
 
-tk.Tk()
 mydb = connect()
 
-def register_livro():
+def register_user():
     
     janela2 = tk.Toplevel()
     janela2.title("Página do Cadastro")
@@ -62,29 +61,33 @@ def register_livro():
     text_cep.grid(column=1,row=9, padx=10, pady=10)
     E9 = tk.Entry(janela2)
     E9.grid(column=1, row=10, padx=10, pady=10)
-    
-    nome = E1.get()
-    email = E2.get()
-    senha = E3.get()
-    data_nascimento = E4.get()
-    rua = E5.get()
-    bairro = E6.get()
-    cidade = E7.get()
-    estado = E8.get()
-    cep = E9.get()
 
-    logando = register(mydb,nome, email, senha, data_nascimento, rua, bairro, cidade, estado, cep)
+    def adc ():
+        nome = E1.get()
+        email = E2.get()
+        senha = E3.get()
+        data_nascimento = E4.get()
+        rua = E5.get()
+        bairro = E6.get()
+        cidade = E7.get()
+        estado = E8.get()
+        cep = E9.get()
+
+        logando = register(mydb,nome, email, senha, data_nascimento, rua, bairro, cidade, estado, cep)
 
     botao_voltar1 = tk.Button(janela2, text="Fechar a janela", command= janela2.destroy)
     botao_voltar1.grid(column=0, row=1, padx=10, pady=10)
 
-    botao_entrar1 = tk.Button(janela2, text="Entrar", command=livros)
-    botao_entrar1.grid(column=0, row=15,  padx= 10, pady=10)
+    botao_c1 = tk.Button(janela2, text="Concluido", command=adc)
+    botao_c1.grid(column=0, row=15,  padx= 10, pady=10)
 
-def login_livro():
+    botao_entrar1 = tk.Button(janela2, text="Entrar", command=livros)
+    botao_entrar1.grid(column=0, row=16,  padx= 10, pady=10)
+
+def login_user():
     janela3 = tk.Toplevel()
     janela3.title("Página do Login")
-    
+
     text_login = tk.Label(janela3, text="Login do usuário!")
     text_login.grid(column=0, row=1, padx= 10, pady=10)
 
@@ -98,16 +101,20 @@ def login_livro():
     E2 = tk.Entry(janela3)
     E2.grid(column=0, row=5, padx= 10, pady=10)
 
-    email = E1.get()
-    senha = E2.get()
+    def adc1():
+        email = E1.get()
+        senha = E2.get()
 
-    logando = login(mydb, email, senha)
+        logando2 = login(mydb, email, senha)
 
     botao_voltar2 = tk.Button(janela3, text="Fechar a janela", command= janela3.destroy)
     botao_voltar2.grid(column=0, row=1,  padx= 10, pady=10)
 
+    botao_c2 = tk.Button(janela3, text="Concluido", command=adc1)
+    botao_c2.grid(column=0, row=7,  padx= 10, pady=10)
+
     botao_entrar2 = tk.Button(janela3, text="Entrar", command=livros)
-    botao_entrar2.grid(column=0, row=7,  padx= 10, pady=10)
+    botao_entrar2.grid(column=0, row=8,  padx= 10, pady=10)
 
 def livros():
     janela7 = tk.Toplevel()
@@ -171,17 +178,22 @@ def cadastro_livros():
     E4 = tk.Entry(janela4)
     E4.grid(column=0, row=10, padx= 10, pady=10)
 
-    titulo = E1.get()
-    autor = E2.get()
-    ano = E3.get()
-    status_ = E4.get()
-    logando = insert(mydb, titulo, autor, ano, status_)
+    def adc2():
+        titulo = E1.get()
+        autor = E2.get()
+        ano = E3.get()
+        status_ = E4.get()
+
+        logando3 = insert(mydb, titulo, autor, ano, status_)
 
     botao_voltar4 = tk.Button(janela4, text="Fechar a janela", command= janela4.destroy)
     botao_voltar4.grid(column=0, row=1, padx=10, pady=10)
 
-    botao_entrar4 = tk.Button(janela4, text="Concluido!", command= janela4.destroy)
-    botao_entrar4.grid(column=0, row=11,  padx= 10, pady=10)
+    botao_c4 = tk.Button(janela4, text="Concluido", command=adc2)
+    botao_c4.grid(column=0, row=11,  padx= 10, pady=10)
+
+    botao_entrar4 = tk.Button(janela4, text="Voltar", command=janela4.destroy)
+    botao_entrar4.grid(column=0, row=12,  padx= 10, pady=10)
 
 def atualizar_livros():
     janela5 = tk.Toplevel()
@@ -215,11 +227,23 @@ def atualizar_livros():
     E5 = tk.Entry(janela5)
     E5.grid(column=0, row=12, padx= 10, pady=10)
 
+    def adc3():
+        titulo_antigo = E1.get()
+        titulo_novo =   E2.get()
+        autor = E3.get()
+        ano = E4.get()
+        status_ = E5.get()
+
+        logando4 = update(mydb, titulo_antigo, titulo_novo, autor, ano, status_)
+
     botao_voltar5 = tk.Button(janela5, text="Fechar a janela", command= janela5.destroy)
     botao_voltar5.grid(column=0, row=1, padx=10, pady=10)
 
-    botao_entrar5 = tk.Button(janela5, text="Concluido!", command= janela5.destroy)
-    botao_entrar5.grid(column=0, row=13,  padx= 10, pady=10)
+    botao_c5 = tk.Button(janela5, text="Concluido!", command= adc3)
+    botao_c5.grid(column=0, row=13,  padx= 10, pady=10)
+
+    botao_entrar5 = tk.Button(janela5, text="Voltar", command=janela5.destroy)
+    botao_entrar5.grid(column=0, row=14,  padx= 10, pady=10)
 
 def emprestar_livros():
     janela6 = tk.Toplevel()
@@ -228,21 +252,29 @@ def emprestar_livros():
     text_emprestar = tk.Label(janela6, text="Emprestar um livro!")
     text_emprestar.grid(column=0, row=2, padx= 10, pady=10)
 
-    text_titulo = tk.Label(janela6,text= "Digite o título do livro:")
-    text_titulo.grid(column=0,row=3, padx= 10, pady=10)
+    text_user = tk.Label(janela6,text= "Digite o seu user:")
+    text_user.grid(column=0,row=3, padx= 10, pady=10)
     E1 = tk.Entry(janela6)
     E1.grid(column=0, row=4, padx= 10, pady=10)
 
-    text_user = tk.Label(janela6,text= "Digite o seu user:")
-    text_user.grid(column=0,row=5, padx= 10, pady=10)
+    text_titulo = tk.Label(janela6,text= "Digite o titulo do livro:")
+    text_titulo.grid(column=0,row=5, padx= 10, pady=10)
     E2 = tk.Entry(janela6)
     E2.grid(column=0, row=6, padx= 10, pady=10)
+
+    def mudando_em():
+        user = E1.get()
+        titulo = E2.get()
+        emprestando = to_lend(mydb, user, titulo)
 
     botao_voltar6 = tk.Button(janela6, text="Fechar a janela", command= janela6.destroy)
     botao_voltar6.grid(column=0, row=1, padx=10, pady=10)
 
-    botao_entrar6 = tk.Button(janela6, text="Concluido!", command= janela6.destroy)
-    botao_entrar6.grid(column=0, row=7,  padx= 10, pady=10)
+    botao_c6 = tk.Button(janela6, text="Concluido!", command= mudando_em)
+    botao_c6.grid(column=0, row=7,  padx= 10, pady=10)
+
+    botao_entrar6 = tk.Button(janela6, text="Voltar", command=janela6.destroy)
+    botao_entrar6.grid(column=0, row=8,  padx= 10, pady=10)
 
 def devolver_livros():
     janela7 = tk.Toplevel()
@@ -261,21 +293,42 @@ def devolver_livros():
     E2 = tk.Entry(janela7)
     E2.grid(column=0, row=6, padx= 10, pady=10)
 
-    botao_voltar6 = tk.Button(janela7, text="Fechar a janela", command= janela7.destroy)
-    botao_voltar6.grid(column=0, row=1, padx=10, pady=10)
+    def adc5():
+        user = E2.get()
+        titulo =   E1.get()
 
-    botao_entrar6 = tk.Button(janela7, text="Concluido!", command= janela7.destroy)
-    botao_entrar6.grid(column=0, row=7,  padx= 10, pady=10)
+        logando6 = give_back(mydb, user, titulo)
+
+    botao_voltar7 = tk.Button(janela7, text="Fechar a janela", command= janela7.destroy)
+    botao_voltar7.grid(column=0, row=1, padx=10, pady=10)
+
+    botao_entrar7 = tk.Button(janela7, text="Concluido!", command= adc5)
+    botao_entrar7.grid(column=0, row=7,  padx= 10, pady=10)
+
+    botao_entrar7 = tk.Button(janela7, text="Voltar", command=janela7.destroy)
+    botao_entrar7.grid(column=0, row=8,  padx= 10, pady=10)
 
 def listar_livros():
-    janela8 = tk.Toplevel()
+    rows = []
+
+    janela8 = tk.Tk()
     janela8.title("Lista dos livros")
     
-    text_emprestar = tk.Label(janela8, text="Lista!")
-    text_emprestar.grid(column=0, row=2, padx= 10, pady=10)
+    cursor = mydb.cursor()
+    cursor.execute("SELECT * FROM livros")
+    rows = cursor.fetchall()
 
-    botao_voltar7 = tk.Button(janela8, text="Fechar a janela", command= janela8.destroy)
-    botao_voltar7.grid(column=0, row=1, padx=10, pady=10)
+    for row in rows:
+        texto = f"ID: {row[0]}, Título: {row[1]}, Autor: {row[2]}, Ano: {row[3]}"
+        label_lista = tk.Label(janela8,text=texto)
+        label_lista.grid(column=0, row=2, padx=10, pady=10)
+
+    botao_voltar8 = tk.Button(janela8, text="Fechar a janela", command= janela8.destroy)
+    botao_voltar8.grid(column=0, row=1, padx=10, pady=10)
+
+    botao_entrar8 = tk.Button(janela8, text="Voltar", command=janela8.destroy)
+    botao_entrar8.grid(column=0, row=7,  padx= 10, pady=10)
+
 
 janela = tk.Tk()
 janela.title('Sistema Biblioteca')
@@ -285,20 +338,13 @@ texto_orientacao1.grid(column=0, row=0)
 
 texto_orientacao2 = Label(janela, text="Clique no botão para fazer o cadastro: ")
 texto_orientacao2.grid(column=0, row=1, padx= 10, pady=10)
-botao = tk.Button(janela, text="Clique aqui", command=register)
+botao = tk.Button(janela, text="Clique aqui", command=register_user)
 botao.grid(column=0, row=2, padx= 10, pady=10)
 
 texto_orientacao3 = Label(janela, text="Clique no botão para fazer o login: ")
 texto_orientacao3.grid(column=0, row=3, padx= 10, pady=10)
-botao2 = tk.Button(janela, text="Clique aqui", command=login)
+botao2 = tk.Button(janela, text="Clique aqui", command=login_user)
 botao2.grid(column=0, row=4, padx= 10, pady=10)
-
-
-
-
-
-
-
 
 
 janela.mainloop()

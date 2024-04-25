@@ -316,13 +316,15 @@ def listar_livros():
     
     cursor = mydb.cursor()
     cursor.execute("SELECT * FROM livros")
-    rows = cursor.fetchall()
+    livros = cursor.fetchall()
 
-    for row in rows:
-        texto = f"ID: {row[0]}, Título: {row[1]}, Autor: {row[2]}, Ano: {row[3]}"
+    for livro in livros:
+        texto = f"ID: {livro[0]}, Título: {livro[1]}, Autor: {livro[2]}, Ano: {livro[3]}"
         label_lista = tk.Label(janela8,text=texto)
         label_lista.grid(column=0, row=2, padx=10, pady=10)
 
+    mydb.close()
+    
     botao_voltar8 = tk.Button(janela8, text="Fechar a janela", command= janela8.destroy)
     botao_voltar8.grid(column=0, row=1, padx=10, pady=10)
 
